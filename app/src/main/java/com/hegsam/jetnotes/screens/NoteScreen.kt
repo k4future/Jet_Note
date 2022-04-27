@@ -61,6 +61,7 @@ fun NoteScreen(
                 Modifier.padding(top = 9.dp, bottom = 8.dp),
                 text = title.value,
                 label = "Title",
+                singleLine = true,
                 onTextChange = {
                     if (it.all { char ->
                             char.isLetterOrDigit() || char.isWhitespace()
@@ -72,6 +73,7 @@ fun NoteScreen(
                 modifier = Modifier.padding(top = 9.dp, bottom = 8.dp),
                 text = description.value,
                 label = "Add a note",
+                maxLines = 100,
                 onTextChange = {
                     if (it.all { char ->
                             char.isLetter() || char.isWhitespace()
@@ -84,7 +86,7 @@ fun NoteScreen(
                     onAddNote(Note(title = title.value, description = description.value))
                     title.value = ""
                     description.value = ""
-                    Toast.makeText(context,"Note Added",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Note Added", Toast.LENGTH_SHORT).show()
                 }
             })
 
@@ -93,6 +95,9 @@ fun NoteScreen(
             LazyColumn {
                 items(notes) { note ->
                     NoteRow(note = note, onNoteClicked = {
+                        title.value = note.title
+                        description.value = note.description
+                    }, onNoteLongPressed = {
                         onRemoveNote(it)
                     })
                 }

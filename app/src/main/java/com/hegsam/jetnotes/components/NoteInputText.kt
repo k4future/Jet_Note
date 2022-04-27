@@ -19,6 +19,7 @@ fun NoteInputText(
     text: String,
     label: String,
     maxLines: Int = 1,
+    singleLine: Boolean = false,
     onTextChange: (String) -> Unit,
     onImeAction: () -> Unit = {}
 ) {
@@ -28,6 +29,7 @@ fun NoteInputText(
         onValueChange = onTextChange,
         colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent),
         maxLines = maxLines,
+        singleLine = singleLine,
         label = {
             Text(text = label)
         },
